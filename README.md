@@ -119,7 +119,7 @@ npm i sass sass-loader style-loader webpack webpack-cli webpack-dev-server @babe
 # 📈🪶 Progress Screenshots/Code
 ### _This section will have all the screenshots & code for my updated progress while developing..._
 
-### Got the canvas setup and PixiJS _more-or-less_ working.  
+Got the canvas setup and PixiJS _more-or-less_ working.  
 
 ![Screenshot 2024-12-14 120621](https://github.com/user-attachments/assets/88f5bc99-2cd0-480a-a1a2-1917f5d54bbd)
 ```js
@@ -189,3 +189,63 @@ console.log('JS (JavaScript) file connected.');
     main.stage.addChild(circle);
 })();
 ```
+
+Added rectangles and defined them for each border.
+
+![Screenshot 2024-12-14 131830](https://github.com/user-attachments/assets/433a9bc1-3b97-427f-a9b4-405ae8071d50)
+```js
+const borderOptions = [ // border options
+        {
+            top: 
+            {
+                x: 0,
+                y: 0,
+                width: getWidth,
+                height: 5
+            },
+            bottom: 
+            {
+                x: 0,
+                y: getHeight - 5,
+                width: getWidth,
+                height: 5
+            },
+            left: 
+            {
+                x: 0,
+                y: 5,
+                width: 5,
+                height: getHeight
+            },
+            right: 
+            {
+                x: getWidth - 5,
+                y: 5,
+                width: 5,
+                height: getHeight
+            }
+        }
+    ]
+    // console.log(borderOptions)
+
+    // The Borders >>> top, bottom, left, right
+    // topBorder.rect(0, 0, getWidth, 5); // top
+    topBorder.rect(borderOptions[0].top.x, borderOptions[0].top.y, borderOptions[0].top.width, borderOptions[0].top.height); // top
+    topBorder.fill(0xE7492A);
+
+    bottomBorder.rect(borderOptions[0].bottom.x, borderOptions[0].bottom.y, borderOptions[0].bottom.width, borderOptions[0].bottom.height); // bottom
+    bottomBorder.fill(0xE7492A);
+
+    leftBorder.rect(borderOptions[0].left.x, borderOptions[0].left.y, borderOptions[0].left.width, borderOptions[0].left.height); //left
+    leftBorder.fill(0xE7492A);
+
+    rightBorder.rect(borderOptions[0].right.x, borderOptions[0].right.y, borderOptions[0].right.width, borderOptions[0].right.height); //right
+    rightBorder.fill(0xE7492A);
+
+    // Append Graphics on Canvas >>>
+    main.stage.addChild(circle);
+    main.stage.addChild(topBorder);
+    main.stage.addChild(bottomBorder);
+    main.stage.addChild(leftBorder);
+    main.stage.addChild(rightBorder);
+    ```
