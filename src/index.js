@@ -135,12 +135,20 @@ console.log('JS (JavaScript) file connected.');
             console.log(circle.x, "x-axis", circle.y, "y-axis")
         }, 1000);
 
-        if (circle.x > canvasWidth / 2) {
+        if (circle.x > canvasWidth / 2) { // right 
             circle.x = canvasWidth / 2
             circle.y += 1 * time.deltaTime;
+            // on hit, change color
+            rightBorder.rect(borderOptions[0].right.x, borderOptions[0].right.y, borderOptions[0].right.width, borderOptions[0].right.height); // right
+            rightBorder.fill(0x95C730); 
+            main.stage.addChild(rightBorder);
 
-            if (circle.y > canvasHeight / 2) {
+            if (circle.y > canvasHeight / 2) { // bottom 
                 circle.y = canvasWidth / 2
+
+                bottomBorder.rect(borderOptions[0].bottom.x, borderOptions[0].bottom.y, borderOptions[0].bottom.width, borderOptions[0].bottom.height); // bottom
+                bottomBorder.fill(0x95C730); 
+                main.stage.addChild(bottomBorder);
             }
         }
     })
