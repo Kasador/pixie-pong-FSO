@@ -26,7 +26,7 @@ When fully implemented, your application should look like the example I’ve att
 
 ## 📋 References
 
-![Screenshot 2024-12-05 080729](https://github.com/user-attachments/assets/041afcb1-d1be-4091-82fb-a6b8d9d883d2)
+![Screenshot 2024-12-14 073920](https://github.com/user-attachments/assets/b975b15a-4af5-4ac3-aa2c-5fb2a68c3c46)
 
 # 🔗 npm - Dependencies
 
