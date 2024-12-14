@@ -109,16 +109,16 @@ console.log('JS (JavaScript) file connected.');
     // The Borders >>> top, bottom, left, right
     // topBorder.rect(0, 0, getWidth, 5); // top
     topBorder.rect(borderOptions[0].top.x, borderOptions[0].top.y, borderOptions[0].top.width, borderOptions[0].top.height); // top
-    topBorder.fill(0xff5555);
+    topBorder.fill(0x2f4f4f);
 
     bottomBorder.rect(borderOptions[0].bottom.x, borderOptions[0].bottom.y, borderOptions[0].bottom.width, borderOptions[0].bottom.height); // bottom
-    bottomBorder.fill(0xff5555);
+    bottomBorder.fill(0x2f4f4f);
 
     leftBorder.rect(borderOptions[0].left.x, borderOptions[0].left.y, borderOptions[0].left.width, borderOptions[0].left.height); // left
-    leftBorder.fill(0xff5555);
+    leftBorder.fill(0x2f4f4f);
 
     rightBorder.rect(borderOptions[0].right.x, borderOptions[0].right.y, borderOptions[0].right.width, borderOptions[0].right.height); // right
-    rightBorder.fill(0xff5555);
+    rightBorder.fill(0x2f4f4f);
 
     // Append Graphics on Canvas >>>
     main.stage.addChild(circle);
@@ -140,14 +140,14 @@ console.log('JS (JavaScript) file connected.');
             circle.y += 1 * time.deltaTime;
             // on hit, change color
             rightBorder.rect(borderOptions[0].right.x, borderOptions[0].right.y, borderOptions[0].right.width, borderOptions[0].right.height); // right
-            rightBorder.fill(0x95C730); 
+            rightBorder.fill(0xE7492A); 
             main.stage.addChild(rightBorder);
 
             if (circle.y > canvasHeight / 2) { // bottom 
                 circle.y = canvasWidth / 2
 
                 bottomBorder.rect(borderOptions[0].bottom.x, borderOptions[0].bottom.y, borderOptions[0].bottom.width, borderOptions[0].bottom.height); // bottom
-                bottomBorder.fill(0x95C730); 
+                bottomBorder.fill(0xE7492A); 
                 main.stage.addChild(bottomBorder);
             }
         }

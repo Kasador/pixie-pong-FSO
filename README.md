@@ -119,7 +119,7 @@ npm i sass sass-loader style-loader webpack webpack-cli webpack-dev-server @babe
 # 📈🪶 Progress Screenshots/Code
 ### _This section will have all the screenshots & code for my updated progress while developing..._
 
-Got the canvas setup and PixiJS _more-or-less_ working.  
+## Got the canvas setup and PixiJS _more-or-less_ working.  
 
 ![Screenshot 2024-12-14 120621](https://github.com/user-attachments/assets/88f5bc99-2cd0-480a-a1a2-1917f5d54bbd)
 ```js
@@ -190,7 +190,7 @@ console.log('JS (JavaScript) file connected.');
 })();
 ```
 
-Added rectangles and defined them for each border.
+## Added rectangles and defined them for each border.
 
 ![Screenshot 2024-12-14 131830](https://github.com/user-attachments/assets/433a9bc1-3b97-427f-a9b4-405ae8071d50)
 ```js
@@ -249,7 +249,7 @@ const borderOptions = [ // border options
     main.stage.addChild(leftBorder);
     main.stage.addChild(rightBorder);
 ```
-Animating the circle. _(in progress)_
+### Animating the circle. _(in progress)_
 
 ![Screenshot 2024-12-14 140537](https://github.com/user-attachments/assets/07b10bdf-be15-47f5-807e-297f78c416cb)
 ```js
@@ -271,3 +271,6 @@ Animating the circle. _(in progress)_
         }
     })
 ```
+## Change color of border when hit detected on circle graphic.
+
+![Screenshot 2024-12-14 143811](https://github.com/user-attachments/assets/0a2ec228-d8b9-4431-9446-969e9d2f3f3a)
