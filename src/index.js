@@ -8,10 +8,11 @@ import { Application, Graphics } from 'pixi.js'; // new ES6 imports
     3) https://pixijs.com/8.x/examples
     4) https://pixijs.download/v6.4.0/docs/PIXI.Application.html
     5) https://pixijs.com/8.x/examples/graphics/simple
+    6) https://codewithstein.com/how-to-change-the-size-of-a-pixijs-application/
+    7) https://stackoverflow.com/questions/15241915/how-to-change-css-property-using-javascript
 */
 
 console.log('JS (JavaScript) file connected.');
-const main = document.getElementById('main');
 
 // Main App >>> 
 (async () => { // IIFE (Immediately Invoked Function Expression)
@@ -19,11 +20,16 @@ const main = document.getElementById('main');
 
     await main.init({ // init main
         background: '#0099B3',
-        resizeTo: main
+        height:  500,
+        width: 500
     })
 
     document.body.appendChild(main.canvas); // append the app to the body element, the application
     console.log(main.canvas); // see height and width of canvas
+
+    // Style canvas and center it! I know, I know.. this is the only way I could find to do so... 
+    // main.canvas.style = "position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto; box-shadow: blue 0px 0px 0px 2px inset, rgb(255, 255, 255) 10px -10px 0px -3px, rgb(31, 193, 27) 10px -10px, rgb(255, 255, 255) 20px -20px 0px -3px, rgb(255, 217, 19) 20px -20px, rgb(255, 255, 255) 30px -30px 0px -3px, rgb(255, 156, 85) 30px -30px, rgb(255, 255, 255) 40px -40px 0px -3px, rgb(255, 85, 85) 40px -40px;";
+    main.canvas.className = "canvasStyles"; // yeah... the new way much better hahaha
 
     let getWidth = main.canvas.getAttribute('width');
     let getHeight = main.canvas.getAttribute('height');
@@ -31,7 +37,7 @@ const main = document.getElementById('main');
 
     const circle = new Graphics(); // new graphics to make the circle, the Class w/ objects
     circle.interactive = true;
-    circle.on('pointermove', (event) => {
+    circle.on('pointermove', (event) => { // test
         console.log('Pointer moved over this graphic!');
     });
     
