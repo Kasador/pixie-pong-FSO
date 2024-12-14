@@ -3,8 +3,25 @@
 
 
 // color variables >>> the main color scheme
+$color-bg: #0099B3; // baby blue
+$color-border: #E7492A; // red-orange-ish
+$color-active: #95C730;
 
 body { // obviously, the body tag. Haha
-    background-color: green;
+    background-color: grey;
     font-family:Georgia, 'Times New Roman', Times, serif;
+
+    #main {
+        position: absolute;
+        z-index: -1;
+        width: 800px;
+        height: 600px;
+        // background-color: transparent;
+        box-shadow: rgba(232, 228, 201, 0.4) 5px 5px, rgba(232, 228, 201, 0.3) 10px 10px, rgba(232, 228, 201, 0.2) 15px 15px, rgba(232, 228, 201, 0.1) 20px 20px, rgba(232, 228, 201, 0.05) 25px 25px;
+
+        canvas {
+            position: absolute;
+            z-index: 1;
+        }
+    }
 }
