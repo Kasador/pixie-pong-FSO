@@ -14,7 +14,7 @@ Now, here’s the challenge: the application should stop only after the circle h
 
 When fully implemented, your application should look like the example I’ve attached below.
 
-# 🎨 Extra Requirement
+# 💯🚀🎯 Extra Requirement
 
 10% of your grade for this activity will be based on your effort to go the extra mile by adding one of the following features to your PixiJS application. Note that none of these features were shown in the previous demonstration, and for good reason. You only need to implement one of the following features to earn the extra 10%. If left incomplete, the maximum grade you can achieve is 90%. Please choose one of the following features to fully implement:
 
