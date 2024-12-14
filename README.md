@@ -248,4 +248,26 @@ const borderOptions = [ // border options
     main.stage.addChild(bottomBorder);
     main.stage.addChild(leftBorder);
     main.stage.addChild(rightBorder);
-    ```
+```
+Animating the circle. _(in progress)_
+
+![Screenshot 2024-12-14 140537](https://github.com/user-attachments/assets/07b10bdf-be15-47f5-807e-297f78c416cb)
+```js
+// Animation & Callback Events
+    main.ticker.add((time) => { // animate the circle
+        circle.x += 1 * time.deltaTime;
+
+        setTimeout(() => {
+            console.log(circle.x, "x-axis", circle.y, "y-axis")
+        }, 1000);
+
+        if (circle.x > canvasWidth / 2) {
+            circle.x = canvasWidth / 2
+            circle.y += 1 * time.deltaTime;
+
+            if (circle.y > canvasHeight / 2) {
+                circle.y = canvasWidth / 2
+            }
+        }
+    })
+```

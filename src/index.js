@@ -11,6 +11,10 @@ import { Application, Graphics } from 'pixi.js'; // new ES6 imports
     6) https://codewithstein.com/how-to-change-the-size-of-a-pixijs-application/
     7) https://stackoverflow.com/questions/15241915/how-to-change-css-property-using-javascript
     8) https://www.sohamkamani.com/javascript/enums/
+    9) https://api.pixijs.io/@pixi/math/PIXI/Rectangle.html
+    10) https://pixijs.download/v4.8.9/docs/PIXI.ticker.Ticker.html
+    11) https://codewithstein.com/how-to-move-an-object-in-a-pixijs-application/
+    12) https://stackoverflow.com/questions/56952119/pixijs-4-rotation-speed-and-determine-stopping-location-axis
 */
 
 console.log('JS (JavaScript) file connected.');
@@ -50,10 +54,11 @@ console.log('JS (JavaScript) file connected.');
     // Variables >>>
     const canvasWidth = getWidth - 20; // minus the canvas w/h by circle radius
     const canvasHeight = getHeight - 20; // added +5 for the border width (+15 circle / +5 borders = 20)
+
     const circlePosX = canvasWidth / 2; // dividing by 1 confirmed that circle radius won't pass the canvas
     const circlePosY = canvasHeight / 2;
 
-    const circleOptions = { // circle options
+    let circleOptions = { // circle options
         x: circlePosX,
         y: circlePosY,
         radius: 15,
@@ -121,4 +126,22 @@ console.log('JS (JavaScript) file connected.');
     main.stage.addChild(bottomBorder);
     main.stage.addChild(leftBorder);
     main.stage.addChild(rightBorder);
+
+    // Animation & Callback Events
+    main.ticker.add((time) => { // animate the circle
+        circle.x += 1 * time.deltaTime;
+
+        setTimeout(() => {
+            console.log(circle.x, "x-axis", circle.y, "y-axis")
+        }, 1000);
+
+        if (circle.x > canvasWidth / 2) {
+            circle.x = canvasWidth / 2
+            circle.y += 1 * time.deltaTime;
+
+            if (circle.y > canvasHeight / 2) {
+                circle.y = canvasWidth / 2
+            }
+        }
+    })
 })();
