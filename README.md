@@ -2,7 +2,7 @@
 
 ### 🔗 https://card-match-game-fso.netlify.app/
 
-In this week's assignment, we will build upon our previous lesson on PixiJS by incorporating our newly acquired knowledge of asynchronous Promise handling.
+In this week's assignment, we will build upon our previous lesson on **PixiJS** by incorporating our newly acquired knowledge of asynchronous Promise handling.
 
 ### ⚙️ Overview
 
@@ -28,6 +28,9 @@ When fully implemented, your application should look like the example I’ve att
 
 ![Screenshot 2024-12-14 073920](https://github.com/user-attachments/assets/b975b15a-4af5-4ac3-aa2c-5fb2a68c3c46)
 
+![Screenshot 2024-12-14 092324](https://github.com/user-attachments/assets/0fd54ef8-4d7a-4be1-9e3e-815b23678e5a)
+- [PixiJS Docs (Library for 2D Rendering)](https://pixijs.com/8.x/guides)
+
 # 🔗 npm - Dependencies
 
 - npm i sass --save-dev
@@ -40,6 +43,7 @@ When fully implemented, your application should look like the example I’ve att
 - npm i babel-loader
 - npm i css-loader
 - npm i html-webpack-plugin
+- npm i pixi.js
 
 # 📈🪶 Progress Screenshots/Code
 ### _This section will have all the screenshots & code for my updated progress while developing..._
