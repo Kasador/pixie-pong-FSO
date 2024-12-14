@@ -48,9 +48,8 @@ console.log('JS (JavaScript) file connected.');
     });
     
     // Variables >>>
-    const canvasWidth = getWidth - 15; // minus the canvas w/h by circle radius
-    const canvasHeight = getHeight - 15;
-
+    const canvasWidth = getWidth - 20; // minus the canvas w/h by circle radius
+    const canvasHeight = getHeight - 20; // added +5 for the border width (+15 circle / +5 borders = 20)
     const circlePosX = canvasWidth / 2; // dividing by 1 confirmed that circle radius won't pass the canvas
     const circlePosY = canvasHeight / 2;
 
@@ -105,16 +104,16 @@ console.log('JS (JavaScript) file connected.');
     // The Borders >>> top, bottom, left, right
     // topBorder.rect(0, 0, getWidth, 5); // top
     topBorder.rect(borderOptions[0].top.x, borderOptions[0].top.y, borderOptions[0].top.width, borderOptions[0].top.height); // top
-    topBorder.fill(0xE7492A);
+    topBorder.fill(0xff5555);
 
     bottomBorder.rect(borderOptions[0].bottom.x, borderOptions[0].bottom.y, borderOptions[0].bottom.width, borderOptions[0].bottom.height); // bottom
-    bottomBorder.fill(0xE7492A);
+    bottomBorder.fill(0xff5555);
 
     leftBorder.rect(borderOptions[0].left.x, borderOptions[0].left.y, borderOptions[0].left.width, borderOptions[0].left.height); // left
-    leftBorder.fill(0xE7492A);
+    leftBorder.fill(0xff5555);
 
     rightBorder.rect(borderOptions[0].right.x, borderOptions[0].right.y, borderOptions[0].right.width, borderOptions[0].right.height); // right
-    rightBorder.fill(0xE7492A);
+    rightBorder.fill(0xff5555);
 
     // Append Graphics on Canvas >>>
     main.stage.addChild(circle);
