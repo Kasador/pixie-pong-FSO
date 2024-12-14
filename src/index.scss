@@ -1,0 +1,10 @@
+// imports to (main - index.scss) file
+@use './styles/reset'; // using @use instead of @import for modern SCSS use-case
+
+
+// color variables >>> the main color scheme
+
+body { // obviously, the body tag. Haha
+    background-color: green;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}

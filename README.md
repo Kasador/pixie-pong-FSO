@@ -30,14 +30,87 @@ When fully implemented, your application should look like the example I’ve att
 
 # 🔗 npm - Dependencies
 
-- npm install sass-loader node-sass
-- npm install --save-dev webpack
-- npm i sass
+- npm i sass --save-dev
+- npm i sass-loader --save-dev
+- npm i style-loader --save-dev
+- npm i webpack --save-dev
+- npm i webpack-cli --save-dev
+- npm i webpack-dev-server --save-dev
+- npm i @babel/preset-env
+- npm i babel-loader
 - npm i css-loader
 - npm i html-webpack-plugin
-- npm i babel-loader
 
 # 📈🪶 Progress Screenshots/Code
 ### _This section will have all the screenshots & code for my updated progress while developing..._
 
 ## 🛠️ Setup 
+
+### Create a _webpack.config.js_ file and add the following...
+```js
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    clean: true, // cleans the output directory before each build
+  },
+  resolve: {
+    extensions: ['.js'],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: 'babel-loader',
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',  // injects styles into DOM
+          'css-loader',    // turns CSS into CommonJS
+          'sass-loader',   // compiles Sass to CSS
+        ],
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg)$/i,  // matches image files
+        type: 'asset/inline',  // emits separate files and returns their URLs
+      },
+    ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      inject: false,
+    }),
+  ],
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'), // serves static files from the 'dist' directory
+    },
+    compress: true,
+    port: 9001,
+    hot: false
+  },
+  mode: 'development',
+};
+```
+### Now, add the _npm_ **(Node Packages)** to your codebase...
+Here is the one line, **_easy install_**, for **all** the packages needed to start.
+```bash
+npm i sass sass-loader style-loader webpack webpack-cli webpack-dev-server @babel/preset-env babel-loader css-loader html-webpack-plugin --save-dev
+```
