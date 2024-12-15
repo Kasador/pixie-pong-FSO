@@ -2,7 +2,7 @@
 import './index.scss';
 import { Application, Graphics } from 'pixi.js'; // new ES6 imports
 
-/* REFS >>> PixiJS
+/* REFS >>> Pixie Pong Development
     1) https://pixijs.com/8.x/examples/basic/container
     2) https://pixijs.com/8.x/playground
     3) https://pixijs.com/8.x/examples
@@ -173,39 +173,68 @@ console.log('JS (JavaScript) file connected.');
         });
     };
 
-    // let circleSpeed = Math.floor(Math.random() * (3000 - 1000) + 1000);
-    let circleSpeed = 1000;
+    let circleSpeed = Math.floor(Math.random() * (2000 - 800) + 1000);
     console.log(circleSpeed, "First Speed of Circle");
 
+    // let isLast = false;
     // Call animateCirclePos() function >>> use promises to update and call again, after resolved using a time it took for travel of circle
     animateCirclePos(canvasWidth / 4, canvasHeight / 2, circleSpeed) // bottom border hit
         .then(() => { // first
             console.log("First Border Hit");
             // circleSpeed = Math.floor(Math.random() * (3000 - 1000) + 1000);
             console.log(circleSpeed, "Second Speed of Circle");
+            circleSpeed = 1000;
             
-            bottomBorder.rect(borderOptions[0].bottom.x, borderOptions[0].bottom.y, borderOptions[0].bottom.width, borderOptions[0].bottom.height); // bottom
+            bottomBorder.rect(borderOptions[0].bottom.x, borderOptions[0].bottom.y, borderOptions[0].bottom.width, borderOptions[0].bottom.height); // bottom hit
             bottomBorder.fill(0xFF0000);
             main.stage.addChild(bottomBorder);
-            return animateCirclePos(canvasWidth / 1.7, - (canvasHeight / 240), circleSpeed); // call sec pos
+
+            console.log(circle.position); // using circle.positon to see how to calculate hard-coded hits on borders :sad-face:
+            return animateCirclePos(canvasWidth - 240, - (canvasHeight - 380), circleSpeed); // call sec pos
         })
         .then(() => { // second
             console.log("Second Border Hit");
+            circleSpeed = 1000;
             // circleSpeed = Math.floor(Math.random() * (3000 - 1000) + 1000);
             console.log(circleSpeed, "Third Speed of Circle");
 
-            return animateCirclePos(- canvasWidth / 2, canvasHeight / 2, circleSpeed); // third pos
+            rightBorder.rect(borderOptions[0].right.x, borderOptions[0].right.y, borderOptions[0].right.width, borderOptions[0].right.height); // right hit 
+            rightBorder.fill(0xFF0000);
+            main.stage.addChild(rightBorder);
+
+            console.log(circle.position);
+            return animateCirclePos(-20, -220, circleSpeed); // third pos
         })
         .then(() => { // third
             console.log("Third Border Hit");
+            circleSpeed = 1000;
             // circleSpeed = Math.floor(Math.random() * (3000 - 1000) + 1000);
             console.log(circleSpeed, "Four Speed of Circle");
 
-            return animateCirclePos(250, 240, circleSpeed); // last pos
+            topBorder.rect(borderOptions[0].top.x, borderOptions[0].top.y, borderOptions[0].top.width, borderOptions[0].top.height); // top hit 
+            topBorder.fill(0xFF0000);
+            main.stage.addChild(topBorder);
+
+            console.log(circle.position);
+            return animateCirclePos((-(canvasWidth / 2)) + 20, 0, circleSpeed); // last pos
         })
         .then(() => { // fourth & last
             console.log("Last Border Hit");
-            alert("All Borders had been hit! Now restarting...", window.location.reload()); // end app
+            circleSpeed = 100; // needed and remain in same last pos, but 100ms is need for the border color to change before alert goes off and ends app
+
+            leftBorder.rect(borderOptions[0].left.x, borderOptions[0].left.y, borderOptions[0].left.width, borderOptions[0].left.height); // left hit 
+            leftBorder.fill(0xFF0000);
+            main.stage.addChild(leftBorder);
+            // isLast = true;
+            
+            console.log(circle.position);
+            return animateCirclePos((-(canvasWidth / 2)) + 20, 0, circleSpeed); // end app
+            // if (isLast ) {
+            //     alert("All Borders had been hit! Now restarting...", window.location.reload()); // end app
+            // }
             // window.location.reload(); // restart app
+        })
+        .then(() => { // end app and restart
+            alert("All Borders had been hit! Now restarting...", window.location.reload()); // end app
         });
 })();
