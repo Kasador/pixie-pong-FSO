@@ -15,6 +15,15 @@ import { Application, Graphics } from 'pixi.js'; // new ES6 imports
     10) https://pixijs.download/v4.8.9/docs/PIXI.ticker.Ticker.html
     11) https://codewithstein.com/how-to-move-an-object-in-a-pixijs-application/
     12) https://stackoverflow.com/questions/56952119/pixijs-4-rotation-speed-and-determine-stopping-location-axis
+    13) https://pixijs.com/8.x/examples/assets/promise / https://pixijs.com/8.x/examples/assets/async
+    14) https://stackoverflow.com/questions/41455028/how-to-wrap-an-asynchronous-function-in-a-promise
+    15) https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises
+    16) https://www.youtube.com/watch?v=DHLw0LDXdos
+    17) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
+    18) https://stackoverflow.com/questions/35711084/js-es6-promise-chaining
+    19) https://www.w3schools.com/jsref/jsref_min.asp
+    20) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min
+    21) https://developer.mozilla.org/en-US/docs/Web/API/Location/reload
 */
 
 console.log('JS (JavaScript) file connected.');
@@ -46,27 +55,24 @@ console.log('JS (JavaScript) file connected.');
     const rightBorder = new Graphics(); // bottom
 
 
-    circle.interactive = true;
-    circle.on('pointermove', (event) => { // test
-        console.log('Pointer moved over this graphic!');
-    });
+    // circle.interactive = true;
+    // circle.on('pointermove', (event) => { // test
+    //     console.log('Pointer moved over this graphic!');
+    // });
     
     // Variables >>>
     const canvasWidth = getWidth - 20; // minus the canvas w/h by circle radius
     const canvasHeight = getHeight - 20; // added +5 for the border width (+15 circle / +5 borders = 20)
 
-    const circlePosX = canvasWidth / 2; // dividing by 1 confirmed that circle radius won't pass the canvas
-    const circlePosY = canvasHeight / 2;
-
     let circleOptions = { // circle options
-        x: circlePosX,
-        y: circlePosY,
+        posX: 240,
+        PosY: 240,
         radius: 15,
         color: '0xE7492A'
     }
 
     // The Circle >>>
-    circle.circle(circleOptions.x, circleOptions.y, circleOptions.radius); // make the object/graphics (x, y, radius)
+    circle.circle(canvasWidth / 2, canvasHeight / 2, circleOptions.radius); // make the object/graphics (x, y, radius)
     circle.fill({ // color the made circle >>> .fill(0xhexcode, 1) is deprecated
         color: circleOptions.color,
         alpha: 1
@@ -104,12 +110,25 @@ console.log('JS (JavaScript) file connected.');
             }
         }
     ]
-    // console.log(borderOptions)
 
-    // The Borders >>> top, bottom, left, right
-    // topBorder.rect(0, 0, getWidth, 5); // top
+    // let bordersHitCircle = { // used if running random POS of circle... More or less how enums work
+    //     top: false,
+    //     bottom: false,
+    //     left: false,
+    //     right: false,
+    // }
+    
+    // console.log(borderOptions)
+    // const changeBorderColor = ((border) => {
+    //     let color = `${`${border}Border.fill(0x2f4f4f);`}`;
+    //     let specificBorder = `${`${border}Border.rect(borderOptions[0].${border}.x, borderOptions[0].${border}.y, borderOptions[0].${border}.width, borderOptions[0].${border}.height);`}`;
+    //     return specificBorder + " " + color;
+    // });
+
+    // DEVELOPER NOTES: Def a better way of doing this...
     topBorder.rect(borderOptions[0].top.x, borderOptions[0].top.y, borderOptions[0].top.width, borderOptions[0].top.height); // top
     topBorder.fill(0x2f4f4f);
+    // console.log(changeBorderColor('top'));
 
     bottomBorder.rect(borderOptions[0].bottom.x, borderOptions[0].bottom.y, borderOptions[0].bottom.width, borderOptions[0].bottom.height); // bottom
     bottomBorder.fill(0x2f4f4f);
@@ -127,29 +146,66 @@ console.log('JS (JavaScript) file connected.');
     main.stage.addChild(leftBorder);
     main.stage.addChild(rightBorder);
 
-    // Animation & Callback Events
-    main.ticker.add((time) => { // animate the circle
-        circle.x += 1 * time.deltaTime;
+    // Animation of Circle >>>
+    const animateCirclePos = (targetX, targetY, duration) => {
+        return new Promise((resolve) => { // new promise to track the data within the animateCirclePos() func, using promises .then() to move on to the next border hit etc
+            // variables to track Pos of circle and as well as the time
+            const startTime = Date.now(); //record time using Date object
+            const startX = circle.x;
+            const startY = circle.y;
 
-        setTimeout(() => {
-            console.log(circle.x, "x-axis", circle.y, "y-axis")
-        }, 1000);
+            const tickerCallbackFunc = () => { // the ticker callback function which is called to remove and start again, thru promsies, and recalling animateCirclePos() func
+                const timePassed = Date.now() - startTime;
+                const totalTime = Math.min(timePassed / duration, 1); // use the time from now - the time the animation starts
+                console.log(totalTime);
 
-        if (circle.x > canvasWidth / 2) { // right 
-            circle.x = canvasWidth / 2
-            circle.y += 1 * time.deltaTime;
-            // on hit, change color
-            rightBorder.rect(borderOptions[0].right.x, borderOptions[0].right.y, borderOptions[0].right.width, borderOptions[0].right.height); // right
-            rightBorder.fill(0xE7492A); 
-            main.stage.addChild(rightBorder);
+                // variables for POS of circle & the time it took
+                circle.x = startX + (targetX - startX) * totalTime;
+                circle.y = startY + (targetY - startY) * totalTime;
 
-            if (circle.y > canvasHeight / 2) { // bottom 
-                circle.y = canvasWidth / 2
+                if (totalTime === 1) {
+                    main.ticker.remove(tickerCallbackFunc); // stop the FPS tracker (the ticker)
+                    resolve(); // only resolve, and move on to the next after total time is complete
+                }
+            };
 
-                bottomBorder.rect(borderOptions[0].bottom.x, borderOptions[0].bottom.y, borderOptions[0].bottom.width, borderOptions[0].bottom.height); // bottom
-                bottomBorder.fill(0xE7492A); 
-                main.stage.addChild(bottomBorder);
-            }
-        }
-    })
+            main.ticker.add(tickerCallbackFunc);
+        });
+    };
+
+    // let circleSpeed = Math.floor(Math.random() * (3000 - 1000) + 1000);
+    let circleSpeed = 1000;
+    console.log(circleSpeed, "First Speed of Circle");
+
+    // Call animateCirclePos() function >>> use promises to update and call again, after resolved using a time it took for travel of circle
+    animateCirclePos(canvasWidth / 4, canvasHeight / 2, circleSpeed) // bottom border hit
+        .then(() => { // first
+            console.log("First Border Hit");
+            // circleSpeed = Math.floor(Math.random() * (3000 - 1000) + 1000);
+            console.log(circleSpeed, "Second Speed of Circle");
+            
+            bottomBorder.rect(borderOptions[0].bottom.x, borderOptions[0].bottom.y, borderOptions[0].bottom.width, borderOptions[0].bottom.height); // bottom
+            bottomBorder.fill(0xFF0000);
+            main.stage.addChild(bottomBorder);
+            return animateCirclePos(canvasWidth / 1.7, - (canvasHeight / 240), circleSpeed); // call sec pos
+        })
+        .then(() => { // second
+            console.log("Second Border Hit");
+            // circleSpeed = Math.floor(Math.random() * (3000 - 1000) + 1000);
+            console.log(circleSpeed, "Third Speed of Circle");
+
+            return animateCirclePos(- canvasWidth / 2, canvasHeight / 2, circleSpeed); // third pos
+        })
+        .then(() => { // third
+            console.log("Third Border Hit");
+            // circleSpeed = Math.floor(Math.random() * (3000 - 1000) + 1000);
+            console.log(circleSpeed, "Four Speed of Circle");
+
+            return animateCirclePos(250, 240, circleSpeed); // last pos
+        })
+        .then(() => { // fourth & last
+            console.log("Last Border Hit");
+            alert("All Borders had been hit! Now restarting...", window.location.reload()); // end app
+            // window.location.reload(); // restart app
+        });
 })();
